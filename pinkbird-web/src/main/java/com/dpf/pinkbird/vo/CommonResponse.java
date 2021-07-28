@@ -1,8 +1,9 @@
-package com.dpf.springcloud.vo;
+package com.dpf.pinkbird.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 @Data

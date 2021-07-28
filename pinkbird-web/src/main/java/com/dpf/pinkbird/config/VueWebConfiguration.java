@@ -1,4 +1,4 @@
-package com.dpf.springcloud.config;
+package com.dpf.pinkbird.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -10,7 +10,7 @@ public class VueWebConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
+                .allowedOriginPatterns("*")
                 .allowedHeaders("*")
                 .allowCredentials(true)
                 .allowedMethods("GET", "POST")

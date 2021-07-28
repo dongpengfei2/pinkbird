@@ -1,10 +1,5 @@
-package com.dpf.springcloud.service;
-
-import com.dpf.springcloud.bean.JsTreeNode;
-
-import java.util.List;
+package com.dpf.pinkbird.service;
 
 public interface LoginService {
 
-    List<JsTreeNode> getMenus();
 }

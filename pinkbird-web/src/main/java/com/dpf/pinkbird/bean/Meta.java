@@ -1,4 +1,4 @@
-package com.dpf.springcloud.bean;
+package com.dpf.pinkbird.bean;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

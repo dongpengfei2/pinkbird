@@ -1,18 +1,16 @@
-package com.dpf.springcloud.controller;
+package com.dpf.pinkbird.controller;
 
-import com.alibaba.fastjson.JSONObject;
+import com.dpf.pinkbird.bean.Meta;
+import com.dpf.pinkbird.bean.User;
+import com.dpf.pinkbird.service.LoginService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import javax.annotation.Resource;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.dpf.springcloud.bean.Meta;
-import com.dpf.springcloud.bean.User;
-import com.dpf.springcloud.service.LoginService;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.IOUtils;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import javax.annotation.Resource;
-import java.io.*;
-import java.nio.charset.Charset;
 
 @Controller
 @RequestMapping("auth")
@@ -26,14 +24,6 @@ public class LoginController {
     @PostMapping("login")
     public Object login(User user) {
         return new Meta(getToken(user), "ok");
-    }
-
-    @ResponseBody
-    @GetMapping("menus")
-    public Object menu() throws IOException {
-        File file = new File(this.getClass().getClassLoader().getResource("menu.json").getFile());
-        String menuJsonArr = IOUtils.toString(new FileInputStream(file), Charset.defaultCharset());
-        return JSONObject.parseArray(menuJsonArr);
     }
 
     public String getToken(User user) {

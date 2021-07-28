@@ -1,7 +1,7 @@
-package com.dpf.springcloud.advice;
+package com.dpf.pinkbird.advice;
 
-import com.dpf.springcloud.exception.AdException;
-import com.dpf.springcloud.vo.CommonResponse;
+import com.dpf.pinkbird.exception.AdException;
+import com.dpf.pinkbird.vo.CommonResponse;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
