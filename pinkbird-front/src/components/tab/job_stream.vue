@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>注册行为[日][注册]</h3>
+    <h3>流作业</h3>
   </div>
 </template>
 

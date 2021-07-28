@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>数据汇总[日][活跃]</h3>
+    <h3>批作业</h3>
   </div>
 </template>
 

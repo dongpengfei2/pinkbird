@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>收入汇总[日][活跃]</h3>
+    <h3>日志设置</h3>
   </div>
 </template>
 

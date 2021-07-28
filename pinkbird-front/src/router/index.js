@@ -3,17 +3,17 @@ import VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
 import Home from '../components/Home.vue'
 import Welcome from '../components/Welcome.vue'
-import Tab885 from '../components/tab/Tab_885.vue'
-import Tab376 from '../components/tab/Tab_376.vue'
-import Tab774 from '../components/tab/Tab_774.vue'
-import Tab4349 from '../components/tab/Tab_4349.vue'
+import BatchJob from '../components/tab/job_batch.vue'
+import StreamJob from '../components/tab/job_stream.vue'
+import UserConfig from '../components/tab/conf_user.vue'
+import LogConfig from '../components/tab/conf_log.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   { path: '/', redirect: '/login' },
   { path: '/login', component: Login },
-  { path: '/home', component: Home, redirect: '/welcome', children: [{ path: '/welcome', component: Welcome }, { path: '/tab_885', component: Tab885 }, { path: '/tab_376', component: Tab376 }, { path: '/tab_774', component: Tab774 }, { path: '/tab_4349', component: Tab4349 }] }
+  { path: '/home', component: Home, redirect: '/welcome', children: [{ path: '/welcome', component: Welcome }, { path: '/job/batch', component: BatchJob }, { path: '/job/stream', component: StreamJob }, { path: '/config/user', component: UserConfig }, { path: '/config/log', component: LogConfig }] }
 ]
 
 const router = new VueRouter({

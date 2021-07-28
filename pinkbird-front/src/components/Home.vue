@@ -4,7 +4,7 @@
         <el-header>
             <div>
                 <img src="../assets/yellowbird.png" alt="" height="60px">
-                <span>数据管理平台</span>
+                <span>Hadoop作业管理平台</span>
             </div>
              <el-button type='info' @click="logout">退出</el-button>
         </el-header>
@@ -20,12 +20,12 @@
                     <!-- 一级菜单模板区 -->
                     <template slot="title">
                         <!-- 图标 -->
-                        <i :class="iconsObj[item.id]"></i>
+                        <i :class="item.icon"></i>
                         <!-- 文本 -->
                         <span>{{item.name}}</span>
                     </template>
                     <!-- 二级菜单 -->
-                    <el-menu-item :index="'/tab_' + subItem.id" v-for="subItem in item.nodes" :key="subItem.id">
+                    <el-menu-item :index="subItem.url" v-for="subItem in item.nodes" :key="subItem.id">
                         <!-- 二级菜单模板区 -->
                         <template slot="title">
                             <!-- 图标 -->
@@ -50,37 +50,51 @@ export default {
     data () {
         return {
             // 左侧菜单数据
-            menuList: [],
-            iconsObj: {
-                324: 'iconfont icon-hexin',
-                773: 'iconfont icon-caidan-zuoshiyiwujiankong',
-                1504: 'iconfont icon-yunwei',
-                12169: 'iconfont icon-ceshi',
-                12537: 'iconfont icon-hangwei3',
-                12606: 'iconfont icon-hangwei1',
-                16799: 'iconfont icon-kefu',
-                21034: 'iconfont icon-jiankong2',
-                21035: 'iconfont icon-xingwei',
-                21036: 'iconfont icon-yunwei1',
-                12582: 'iconfont icon-jiankong5'
+            menuList: [{
+                id: 1,
+                name: '作业列表',
+                icon: 'iconfont icon-hexin',
+                url: '/flink/job',
+                nodes: [{
+                        id: 11,
+                        name: 'JAR任务',
+                        url: '/job/batch'
+                    },
+                    {
+                        id: 12,
+                        name: 'SQL任务',
+                        url: '/job/stream'
+                    }
+                ]
             },
+            {
+                id: 2,
+                name: '系统管理',
+                icon: 'iconfont icon-yunwei',
+                url: '/sys/config',
+                nodes: [{
+                        id: 21,
+                        name: '系统设置',
+                        url: '/config/user'
+                    },
+                    {
+                        id: 22,
+                        name: '操作日志',
+                        url: '/config/log'
+                    }
+                ]
+            }
+            ],
             // 是否折叠
             isCollapse: false
         }
     },
     created () {
-        this.getMenuList()
     },
     methods: {
         logout () {
             window.sessionStorage.clear()
             this.$router.push('/login')
-        },
-        async getMenuList () {
-            const { data: res } = await this.$http.get('auth/menus')
-            if (res.code !== 200) return this.$message.error(res.message)
-            this.menuList = res.data
-            console.log(res)
         },
         // 点击按钮，切换菜单的折叠与展开
         toggleCollapse () {
