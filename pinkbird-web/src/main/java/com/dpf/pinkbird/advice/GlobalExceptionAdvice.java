@@ -1,7 +1,7 @@
 package com.dpf.pinkbird.advice;
 
 import com.dpf.pinkbird.exception.AdException;
-import com.dpf.pinkbird.vo.CommonResponse;
+import com.dpf.pinkbird.common.CommonResponse;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;

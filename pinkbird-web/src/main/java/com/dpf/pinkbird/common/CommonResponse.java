@@ -1,4 +1,4 @@
-package com.dpf.pinkbird.vo;
+package com.dpf.pinkbird.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,7 +1,7 @@
 package com.dpf.pinkbird.advice;
 
 import com.dpf.pinkbird.annotation.IgnoreResponseAdvice;
-import com.dpf.pinkbird.vo.CommonResponse;
+import com.dpf.pinkbird.common.CommonResponse;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
