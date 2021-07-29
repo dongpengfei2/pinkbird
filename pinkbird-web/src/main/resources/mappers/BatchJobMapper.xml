@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dpf.pinkbird.mapper.BatchJobMapper">
+  <resultMap id="BaseResultMap" type="com.dpf.pinkbird.bean.BatchJob">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="job_id" jdbcType="VARCHAR" property="jobId" />
+    <result column="job_name" jdbcType="VARCHAR" property="jobName" />
+    <result column="job_status" jdbcType="INTEGER" property="jobStatus" />
+    <result column="path_jar" jdbcType="VARCHAR" property="pathJar" />
+    <result column="path_savepoint" jdbcType="VARCHAR" property="pathSavepoint" />
+    <result column="enable_savepoint" jdbcType="INTEGER" property="enableSavepoint" />
+    <result column="jm_mem" jdbcType="INTEGER" property="jmMem" />
+    <result column="tm_mem" jdbcType="INTEGER" property="tmMem" />
+    <result column="yarnslots" jdbcType="INTEGER" property="yarnslots" />
+    <result column="parallelism" jdbcType="INTEGER" property="parallelism" />
+    <result column="class_name" jdbcType="VARCHAR" property="className" />
+    <result column="class_args" jdbcType="VARCHAR" property="classArgs" />
+    <result column="create_userid" jdbcType="INTEGER" property="createUserid" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+    <result column="update_userid" jdbcType="INTEGER" property="updateUserid" />
+    <result column="update_at" jdbcType="TIMESTAMP" property="updateAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, job_id, job_name, job_status, path_jar, path_savepoint, enable_savepoint, jm_mem, 
+    tm_mem, yarnslots, parallelism, class_name, class_args, create_userid, create_at, 
+    update_userid, update_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from job_batch
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from job_batch
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dpf.pinkbird.bean.BatchJob">
+    insert into job_batch (id, job_id, job_name, 
+      job_status, path_jar, path_savepoint, 
+      enable_savepoint, jm_mem, tm_mem, 
+      yarnslots, parallelism, class_name, 
+      class_args, create_userid, create_at, 
+      update_userid, update_at)
+    values (#{id,jdbcType=INTEGER}, #{jobId,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR}, 
+      #{jobStatus,jdbcType=INTEGER}, #{pathJar,jdbcType=VARCHAR}, #{pathSavepoint,jdbcType=VARCHAR}, 
+      #{enableSavepoint,jdbcType=INTEGER}, #{jmMem,jdbcType=INTEGER}, #{tmMem,jdbcType=INTEGER}, 
+      #{yarnslots,jdbcType=INTEGER}, #{parallelism,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, 
+      #{classArgs,jdbcType=VARCHAR}, #{createUserid,jdbcType=INTEGER}, #{createAt,jdbcType=TIMESTAMP}, 
+      #{updateUserid,jdbcType=INTEGER}, #{updateAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dpf.pinkbird.bean.BatchJob">
+    insert into job_batch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="jobId != null">
+        job_id,
+      </if>
+      <if test="jobName != null">
+        job_name,
+      </if>
+      <if test="jobStatus != null">
+        job_status,
+      </if>
+      <if test="pathJar != null">
+        path_jar,
+      </if>
+      <if test="pathSavepoint != null">
+        path_savepoint,
+      </if>
+      <if test="enableSavepoint != null">
+        enable_savepoint,
+      </if>
+      <if test="jmMem != null">
+        jm_mem,
+      </if>
+      <if test="tmMem != null">
+        tm_mem,
+      </if>
+      <if test="yarnslots != null">
+        yarnslots,
+      </if>
+      <if test="parallelism != null">
+        parallelism,
+      </if>
+      <if test="className != null">
+        class_name,
+      </if>
+      <if test="classArgs != null">
+        class_args,
+      </if>
+      <if test="createUserid != null">
+        create_userid,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+      <if test="updateUserid != null">
+        update_userid,
+      </if>
+      <if test="updateAt != null">
+        update_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="jobId != null">
+        #{jobId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobStatus != null">
+        #{jobStatus,jdbcType=INTEGER},
+      </if>
+      <if test="pathJar != null">
+        #{pathJar,jdbcType=VARCHAR},
+      </if>
+      <if test="pathSavepoint != null">
+        #{pathSavepoint,jdbcType=VARCHAR},
+      </if>
+      <if test="enableSavepoint != null">
+        #{enableSavepoint,jdbcType=INTEGER},
+      </if>
+      <if test="jmMem != null">
+        #{jmMem,jdbcType=INTEGER},
+      </if>
+      <if test="tmMem != null">
+        #{tmMem,jdbcType=INTEGER},
+      </if>
+      <if test="yarnslots != null">
+        #{yarnslots,jdbcType=INTEGER},
+      </if>
+      <if test="parallelism != null">
+        #{parallelism,jdbcType=INTEGER},
+      </if>
+      <if test="className != null">
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="classArgs != null">
+        #{classArgs,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserid != null">
+        #{createUserid,jdbcType=INTEGER},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserid != null">
+        #{updateUserid,jdbcType=INTEGER},
+      </if>
+      <if test="updateAt != null">
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dpf.pinkbird.bean.BatchJob">
+    update job_batch
+    <set>
+      <if test="jobId != null">
+        job_id = #{jobId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        job_name = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobStatus != null">
+        job_status = #{jobStatus,jdbcType=INTEGER},
+      </if>
+      <if test="pathJar != null">
+        path_jar = #{pathJar,jdbcType=VARCHAR},
+      </if>
+      <if test="pathSavepoint != null">
+        path_savepoint = #{pathSavepoint,jdbcType=VARCHAR},
+      </if>
+      <if test="enableSavepoint != null">
+        enable_savepoint = #{enableSavepoint,jdbcType=INTEGER},
+      </if>
+      <if test="jmMem != null">
+        jm_mem = #{jmMem,jdbcType=INTEGER},
+      </if>
+      <if test="tmMem != null">
+        tm_mem = #{tmMem,jdbcType=INTEGER},
+      </if>
+      <if test="yarnslots != null">
+        yarnslots = #{yarnslots,jdbcType=INTEGER},
+      </if>
+      <if test="parallelism != null">
+        parallelism = #{parallelism,jdbcType=INTEGER},
+      </if>
+      <if test="className != null">
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="classArgs != null">
+        class_args = #{classArgs,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserid != null">
+        create_userid = #{createUserid,jdbcType=INTEGER},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserid != null">
+        update_userid = #{updateUserid,jdbcType=INTEGER},
+      </if>
+      <if test="updateAt != null">
+        update_at = #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dpf.pinkbird.bean.BatchJob">
+    update job_batch
+    set job_id = #{jobId,jdbcType=VARCHAR},
+      job_name = #{jobName,jdbcType=VARCHAR},
+      job_status = #{jobStatus,jdbcType=INTEGER},
+      path_jar = #{pathJar,jdbcType=VARCHAR},
+      path_savepoint = #{pathSavepoint,jdbcType=VARCHAR},
+      enable_savepoint = #{enableSavepoint,jdbcType=INTEGER},
+      jm_mem = #{jmMem,jdbcType=INTEGER},
+      tm_mem = #{tmMem,jdbcType=INTEGER},
+      yarnslots = #{yarnslots,jdbcType=INTEGER},
+      parallelism = #{parallelism,jdbcType=INTEGER},
+      class_name = #{className,jdbcType=VARCHAR},
+      class_args = #{classArgs,jdbcType=VARCHAR},
+      create_userid = #{createUserid,jdbcType=INTEGER},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      update_userid = #{updateUserid,jdbcType=INTEGER},
+      update_at = #{updateAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
