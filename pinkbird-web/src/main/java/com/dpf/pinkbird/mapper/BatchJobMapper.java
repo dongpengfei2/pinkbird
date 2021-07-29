@@ -1,17 +1,8 @@
 package com.dpf.pinkbird.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.dpf.pinkbird.bean.BatchJob;
 
-public interface BatchJobMapper {
-    int deleteByPrimaryKey(Integer id);
+public interface BatchJobMapper extends BaseMapper<BatchJob> {
 
-    int insert(BatchJob record);
-
-    int insertSelective(BatchJob record);
-
-    BatchJob selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(BatchJob record);
-
-    int updateByPrimaryKey(BatchJob record);
 }
