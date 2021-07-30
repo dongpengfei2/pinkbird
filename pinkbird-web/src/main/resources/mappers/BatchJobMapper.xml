@@ -15,18 +15,19 @@
     <result column="parallelism" jdbcType="INTEGER" property="parallelism" />
     <result column="class_name" jdbcType="VARCHAR" property="className" />
     <result column="class_args" jdbcType="VARCHAR" property="classArgs" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="create_userid" jdbcType="INTEGER" property="createUserid" />
     <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
     <result column="update_userid" jdbcType="INTEGER" property="updateUserid" />
     <result column="update_at" jdbcType="TIMESTAMP" property="updateAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, job_id, job_name, job_status, path_jar, path_savepoint, enable_savepoint, jm_mem, 
-    tm_mem, yarnslots, parallelism, class_name, class_args, create_userid, create_at, 
-    update_userid, update_at
+    id, job_id, job_name, job_status, path_jar, path_savepoint, enable_savepoint, jm_mem,
+    tm_mem, yarnslots, parallelism, class_name, class_args, start_time, create_userid,
+    create_at, update_userid, update_at
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from job_batch
     where id = #{id,jdbcType=INTEGER}
@@ -36,18 +37,20 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.dpf.pinkbird.bean.BatchJob">
-    insert into job_batch (id, job_id, job_name, 
-      job_status, path_jar, path_savepoint, 
-      enable_savepoint, jm_mem, tm_mem, 
-      yarnslots, parallelism, class_name, 
-      class_args, create_userid, create_at, 
-      update_userid, update_at)
-    values (#{id,jdbcType=INTEGER}, #{jobId,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR}, 
-      #{jobStatus,jdbcType=INTEGER}, #{pathJar,jdbcType=VARCHAR}, #{pathSavepoint,jdbcType=VARCHAR}, 
-      #{enableSavepoint,jdbcType=INTEGER}, #{jmMem,jdbcType=INTEGER}, #{tmMem,jdbcType=INTEGER}, 
-      #{yarnslots,jdbcType=INTEGER}, #{parallelism,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, 
-      #{classArgs,jdbcType=VARCHAR}, #{createUserid,jdbcType=INTEGER}, #{createAt,jdbcType=TIMESTAMP}, 
-      #{updateUserid,jdbcType=INTEGER}, #{updateAt,jdbcType=TIMESTAMP})
+    insert into job_batch (id, job_id, job_name,
+    job_status, path_jar, path_savepoint,
+    enable_savepoint, jm_mem, tm_mem,
+    yarnslots, parallelism, class_name,
+    class_args, start_time, create_userid,
+    create_at, update_userid, update_at
+    )
+    values (#{id,jdbcType=INTEGER}, #{jobId,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR},
+    #{jobStatus,jdbcType=INTEGER}, #{pathJar,jdbcType=VARCHAR}, #{pathSavepoint,jdbcType=VARCHAR},
+    #{enableSavepoint,jdbcType=INTEGER}, #{jmMem,jdbcType=INTEGER}, #{tmMem,jdbcType=INTEGER},
+    #{yarnslots,jdbcType=INTEGER}, #{parallelism,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR},
+    #{classArgs,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{createUserid,jdbcType=INTEGER},
+    #{createAt,jdbcType=TIMESTAMP}, #{updateUserid,jdbcType=INTEGER}, #{updateAt,jdbcType=TIMESTAMP}
+    )
   </insert>
   <insert id="insertSelective" parameterType="com.dpf.pinkbird.bean.BatchJob">
     insert into job_batch
@@ -90,6 +93,9 @@
       </if>
       <if test="classArgs != null">
         class_args,
+      </if>
+      <if test="startTime != null">
+        start_time,
       </if>
       <if test="createUserid != null">
         create_userid,
@@ -144,6 +150,9 @@
       <if test="classArgs != null">
         #{classArgs,jdbcType=VARCHAR},
       </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="createUserid != null">
         #{createUserid,jdbcType=INTEGER},
       </if>
@@ -197,6 +206,9 @@
       <if test="classArgs != null">
         class_args = #{classArgs,jdbcType=VARCHAR},
       </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="createUserid != null">
         create_userid = #{createUserid,jdbcType=INTEGER},
       </if>
@@ -215,21 +227,22 @@
   <update id="updateByPrimaryKey" parameterType="com.dpf.pinkbird.bean.BatchJob">
     update job_batch
     set job_id = #{jobId,jdbcType=VARCHAR},
-      job_name = #{jobName,jdbcType=VARCHAR},
-      job_status = #{jobStatus,jdbcType=INTEGER},
-      path_jar = #{pathJar,jdbcType=VARCHAR},
-      path_savepoint = #{pathSavepoint,jdbcType=VARCHAR},
-      enable_savepoint = #{enableSavepoint,jdbcType=INTEGER},
-      jm_mem = #{jmMem,jdbcType=INTEGER},
-      tm_mem = #{tmMem,jdbcType=INTEGER},
-      yarnslots = #{yarnslots,jdbcType=INTEGER},
-      parallelism = #{parallelism,jdbcType=INTEGER},
-      class_name = #{className,jdbcType=VARCHAR},
-      class_args = #{classArgs,jdbcType=VARCHAR},
-      create_userid = #{createUserid,jdbcType=INTEGER},
-      create_at = #{createAt,jdbcType=TIMESTAMP},
-      update_userid = #{updateUserid,jdbcType=INTEGER},
-      update_at = #{updateAt,jdbcType=TIMESTAMP}
+    job_name = #{jobName,jdbcType=VARCHAR},
+    job_status = #{jobStatus,jdbcType=INTEGER},
+    path_jar = #{pathJar,jdbcType=VARCHAR},
+    path_savepoint = #{pathSavepoint,jdbcType=VARCHAR},
+    enable_savepoint = #{enableSavepoint,jdbcType=INTEGER},
+    jm_mem = #{jmMem,jdbcType=INTEGER},
+    tm_mem = #{tmMem,jdbcType=INTEGER},
+    yarnslots = #{yarnslots,jdbcType=INTEGER},
+    parallelism = #{parallelism,jdbcType=INTEGER},
+    class_name = #{className,jdbcType=VARCHAR},
+    class_args = #{classArgs,jdbcType=VARCHAR},
+    start_time = #{startTime,jdbcType=TIMESTAMP},
+    create_userid = #{createUserid,jdbcType=INTEGER},
+    create_at = #{createAt,jdbcType=TIMESTAMP},
+    update_userid = #{updateUserid,jdbcType=INTEGER},
+    update_at = #{updateAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
