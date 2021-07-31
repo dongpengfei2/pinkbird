@@ -22,4 +22,9 @@ public class JobConfigServiceImpl implements JobConfigService {
         QueryWrapper<BatchJob> queryWrapper = new QueryWrapper<>();
         return batchJobMapper.selectPage(jobPage, queryWrapper);
     }
+
+    @Override
+    public void updateStatus(String jobId, Integer jobStatus) {
+        batchJobMapper.updateJobStatus(jobId, jobStatus);
+    }
 }
