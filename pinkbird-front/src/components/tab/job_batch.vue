@@ -26,7 +26,9 @@
         <el-table-column label="名称" prop="jobName" width="300px"></el-table-column>
         <el-table-column label="状态">
           <template slot-scope="scope">
-            <el-switch v-model="scope.row.jobStatus" :active-value="1" :inactive-value="0"></el-switch>
+            <el-switch v-model="scope.row.jobStatus" :active-value="1" :inactive-value="0"
+            @change="jobStatusChange(scope.row)">
+            </el-switch>
           </template>
         </el-table-column>
         <el-table-column label="启动时间" prop="startTime"></el-table-column>
@@ -49,7 +51,7 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="queryInfo.pageNum"
-        :page-sizes="[5, 10, 15, 20]"
+        :page-sizes="[10, 20, 30, 40]"
         :page-size="queryInfo.pageSize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total">
@@ -66,7 +68,7 @@
         queryInfo: {
           query: '',
           pageNum: 1,
-          pageSize: 5
+          pageSize: 10
         },
         batchJobList: [],
         total: 0
@@ -97,6 +99,15 @@
         console.log(newPage)
         this.queryInfo.pageNum = newPage
         this.getBatchJobList()
+      },
+      // 监听switch开关的状态变化
+      async jobStatusChange (jobInfo) {
+        console.log(jobInfo)
+        const { data: res } = await this.$http.put(`jobConfig/${jobInfo.jobId}/status/${jobInfo.jobStatus}`)
+        if (res.code !== 200) {
+          return this.$message.error('更新状态失败')
+        }
+        this.$message.success('更新成功')
       }
     }
   }
