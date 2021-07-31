@@ -23,7 +23,7 @@
       <el-table :data="batchJobList" border stripe>
         <el-table-column label="#" type="index"></el-table-column>
         <el-table-column label="ID" prop="jobId" width="300px"></el-table-column>
-        <el-table-column label="名称" prop="jobName"></el-table-column>
+        <el-table-column label="名称" prop="jobName" width="300px"></el-table-column>
         <el-table-column label="状态">
           <template slot-scope="scope">
             <el-switch v-model="scope.row.jobStatus" :active-value="1" :inactive-value="0"></el-switch>
@@ -31,12 +31,16 @@
         </el-table-column>
         <el-table-column label="启动时间" prop="startTime"></el-table-column>
         <el-table-column label="并行度" prop="parallelism"></el-table-column>
-        <el-table-column label="操作" width="150px">
+        <el-table-column label="操作" width="200px">
           <template>
             <!-- 修改按钮 -->
             <el-button type="primary" icon="el-icon-edit" size="mini"></el-button>
             <!-- 删除按钮 -->
             <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
+            <!-- 重置状态 -->
+            <el-tooltip effect="dark" content="重置状态" placement="top" :enterable="false">
+              <el-button type="warning" icon="el-icon-setting" size="mini"></el-button>
+            </el-tooltip>
           </template>
         </el-table-column>
       </el-table>
