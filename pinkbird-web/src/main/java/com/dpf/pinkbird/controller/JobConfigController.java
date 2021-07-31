@@ -1,6 +1,7 @@
 package com.dpf.pinkbird.controller;
 
 import com.dpf.pinkbird.bean.BatchJob;
+import com.dpf.pinkbird.bean.Pagination;
 import com.dpf.pinkbird.service.JobConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -22,7 +22,7 @@ public class JobConfigController {
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
     @ApiOperation(value = "作业列表接口", notes = "查看作业列表")
-    public List<BatchJob> list(BatchJob batchJob) {
-        return jobConfigService.batchJobList(batchJob);
+    public Object list(Pagination pagination, BatchJob batchJob) {
+        return jobConfigService.batchJobList(pagination);
     }
 }
