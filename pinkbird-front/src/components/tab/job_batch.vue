@@ -45,10 +45,10 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="queryInfo.pageNum"
-        :page-sizes="[100, 200, 300, 400]"
+        :page-sizes="[5, 10, 15, 20]"
         :page-size="queryInfo.pageSize"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="queryInfo.total">
+        :total="total">
       </el-pagination>
     </el-card>
   </div>
@@ -62,10 +62,10 @@
         queryInfo: {
           query: '',
           pageNum: 1,
-          pageSize: 100
+          pageSize: 5
         },
         batchJobList: [],
-        total: 1000
+        total: 0
       }
     },
     created () {
@@ -79,7 +79,8 @@
         if (res.code !== 200) {
           return this.$message.error('获取作业列表失败！')
         }
-        this.batchJobList = res.data
+        this.batchJobList = res.data.records
+        this.total = res.data.total
       },
       // 监听pagesize改变的事件
       handleSizeChange (newSize) {
