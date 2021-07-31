@@ -15,4 +15,9 @@ body,
 
 .el-table {
     margin-top: 10px;
+    font-size: 12px;
+}
+
+.el-pagination {
+    margin-top: 15px;
 }

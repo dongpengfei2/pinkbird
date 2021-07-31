@@ -40,6 +40,16 @@
           </template>
         </el-table-column>
       </el-table>
+      <!-- 分页区域 -->
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="queryInfo.pageNum"
+        :page-sizes="[100, 200, 300, 400]"
+        :page-size="queryInfo.pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="queryInfo.total">
+      </el-pagination>
     </el-card>
   </div>
 </template>
@@ -52,10 +62,10 @@
         queryInfo: {
           query: '',
           pageNum: 1,
-          pageSize: 2
+          pageSize: 100
         },
         batchJobList: [],
-        total: 0
+        total: 1000
       }
     },
     created () {
@@ -66,7 +76,22 @@
         const { data: res } = await this.$http.get('jobConfig/list', {
           params: this.queryInfo
         })
+        if (res.code !== 200) {
+          return this.$message.error('获取作业列表失败！')
+        }
         this.batchJobList = res.data
+      },
+      // 监听pagesize改变的事件
+      handleSizeChange (newSize) {
+        console.log(newSize)
+        this.queryInfo.pageSize = newSize
+        this.getBatchJobList()
+      },
+      // 监听页码值改变的事件
+      handleCurrentChange (newPage) {
+        console.log(newPage)
+        this.queryInfo.pageNum = newPage
+        this.getBatchJobList()
       }
     }
   }
