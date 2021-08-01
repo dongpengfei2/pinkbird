@@ -34,9 +34,9 @@
         <el-table-column label="启动时间" prop="startTime"></el-table-column>
         <el-table-column label="并行度" prop="parallelism"></el-table-column>
         <el-table-column label="操作" width="200px">
-          <template>
+          <template slot-scope="scope">
             <!-- 修改按钮 -->
-            <el-button type="primary" icon="el-icon-edit" size="mini"></el-button>
+            <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditDialog(scope.row.id)"></el-button>
             <!-- 删除按钮 -->
             <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
             <!-- 重置状态 -->
@@ -80,6 +80,15 @@
         <el-button type="primary" @click="addBatchJob">确 定</el-button>
       </span>
     </el-dialog>
+    <!-- 修改作业的对话框 -->
+    <el-dialog
+      title="修改作业" :visible.sync="editDialogVisible" width="50%">
+      <span>这是一段信息</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="editDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="editDialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -110,7 +119,9 @@
             { required: true, message: '请输入作业名称', trigger: 'blue' },
             { min: 3, max: 10, message: '作业名称的长度在3～10个字符之间', trigger: 'blur' }
           ]
-        }
+        },
+        // 控制修改用户对话框的显示与隐藏
+        editDialogVisible: false
       }
     },
     created () {
@@ -167,6 +178,11 @@
           // 重新获取用户列表
           this.getBatchJobList()
         })
+      },
+      // 展示编辑作业的对话框
+      showEditDialog (id) {
+        console.log(id)
+        this.editDialogVisible = true
       }
     }
   }
