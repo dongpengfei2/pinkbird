@@ -10,13 +10,13 @@
     <el-card>
       <!-- 搜索与添加区域 -->
       <el-row :gutter="20">
-        <el-col :span="8">
-          <el-input placeholder="请输入内容">
-            <el-button slot="append" icon="el-icon-search"></el-button>
+        <el-col :span="9">
+          <el-input placeholder="请输入内容" v-model="queryInfo.query">
+            <el-button slot="append" icon="el-icon-search" @click="getBatchJobList"></el-button>
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary">新增任务</el-button>
+          <el-button type="primary" @click="addDialogVisible = true">新增任务</el-button>
         </el-col>
       </el-row>
       <!-- 作业列表区域 -->
@@ -57,6 +57,29 @@
         :total="total">
       </el-pagination>
     </el-card>
+    <!-- 添加作业的对话框 -->
+    <el-dialog
+      title="添加作业" :visible.sync="addDialogVisible" width="50%" @close="addDialogClosed">
+      <!-- 内容主体区域 -->
+      <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="100px">
+        <el-form-item label="作业名称" prop="jobName">
+          <el-input v-model="addForm.jobName"></el-input>
+        </el-form-item>
+        <el-form-item label="JAR路径" prop="pathJar">
+          <el-input v-model="addForm.pathJar"></el-input>
+        </el-form-item>
+        <el-form-item label="主类全类名" prop="className">
+          <el-input v-model="addForm.className"></el-input>
+        </el-form-item>
+        <el-form-item label="作业参数" prop="classArgs">
+          <el-input v-model="addForm.classArgs"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="addDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addBatchJob">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -71,7 +94,23 @@
           pageSize: 10
         },
         batchJobList: [],
-        total: 0
+        total: 0,
+        // 控制添加对话框的显示与隐藏
+        addDialogVisible: false,
+        // 添加用户的表单数据
+        addForm: {
+          jobName: '',
+          pathJar: '',
+          className: '',
+          classArgs: ''
+        },
+        // 添加表单验证规则对象
+        addFormRules: {
+          jobName: [
+            { required: true, message: '请输入作业名称', trigger: 'blue' },
+            { min: 3, max: 10, message: '作业名称的长度在3～10个字符之间', trigger: 'blur' }
+          ]
+        }
       }
     },
     created () {
@@ -108,6 +147,26 @@
           return this.$message.error('更新状态失败')
         }
         this.$message.success('更新成功')
+      },
+      // 监听添加作业对话框的关闭事件
+      addDialogClosed () {
+        this.$refs.addFormRef.resetFields()
+      },
+      // 点击按钮添加作业
+      addBatchJob () {
+        this.$refs.addFormRef.validate(async valid => {
+          if (!valid) return
+          // 可以发起添加作业的网络请求
+          const { data: res } = await this.$http.post('jobConfig/addJob', this.qs.stringify(this.addForm))
+          if (res.code !== 200) {
+            this.$message.error('添加作业失败')
+          }
+          this.$message.success('添加作业成功')
+          // 隐藏对话框
+          this.addDialogVisible = false
+          // 重新获取用户列表
+          this.getBatchJobList()
+        })
       }
     }
   }
