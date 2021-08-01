@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Update;
 
 public interface BatchJobMapper extends BaseMapper<BatchJob> {
     @Select("select * from job_batch")
-    IPage<BatchJob> selectPage(@Param("pg") IPage<BatchJob> page, @Param("batchJob") BatchJob batchJob);
+    IPage<BatchJob> selectPage(IPage<BatchJob> page);
     @Update("update job_batch set job_status=#{jobStatus} where job_id=#{jobId}")
     void updateJobStatus(@Param("jobId") String jobId, @Param("jobStatus") Integer jobStatus);
 }

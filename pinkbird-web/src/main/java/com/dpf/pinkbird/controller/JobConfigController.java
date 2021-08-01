@@ -24,7 +24,7 @@ public class JobConfigController {
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
     @ApiOperation(value = "作业列表接口", notes = "查看作业列表")
-    public Object list(Pagination pagination, BatchJob batchJob) {
+    public Object list(Pagination pagination) {
         return jobConfigService.batchJobList(pagination);
     }
 
@@ -32,5 +32,11 @@ public class JobConfigController {
     public Object updateStatus(@PathVariable String jobId, @PathVariable Integer jobStatus) {
         jobConfigService.updateStatus(jobId, jobStatus);
         return new CommonResult(200, "success");
+    }
+
+    @RequestMapping(value = "addJob", method = RequestMethod.POST)
+    public Object addBatchJob(BatchJob batchJob) {
+        System.out.println(batchJob.getJobName());
+        return new CommonResult(200, "ok");
     }
 }
