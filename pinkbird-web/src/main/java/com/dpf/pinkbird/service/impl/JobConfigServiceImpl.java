@@ -20,6 +20,11 @@ public class JobConfigServiceImpl implements JobConfigService {
     }
 
     @Override
+    public void addBatchJob(BatchJob batchJob) {
+        batchJobMapper.insert(batchJob);
+    }
+
+    @Override
     public void updateStatus(String jobId, Integer jobStatus) {
         batchJobMapper.updateJobStatus(jobId, jobStatus);
     }

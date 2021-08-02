@@ -1,5 +1,7 @@
 package com.dpf.pinkbird.bean;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -12,6 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("job_batch")
 public class BatchJob {
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     private String jobId;

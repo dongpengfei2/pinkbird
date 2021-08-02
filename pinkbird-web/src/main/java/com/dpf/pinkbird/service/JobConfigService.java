@@ -6,5 +6,6 @@ import com.dpf.pinkbird.bean.Pagination;
 
 public interface JobConfigService {
     IPage<BatchJob> batchJobList(Pagination pagination);
+    void addBatchJob(BatchJob batchJob);
     void updateStatus(String jobId, Integer jobStatus);
 }

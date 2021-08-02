@@ -36,7 +36,7 @@ public class JobConfigController {
 
     @RequestMapping(value = "addJob", method = RequestMethod.POST)
     public Object addBatchJob(BatchJob batchJob) {
-        System.out.println(batchJob.getJobName());
+        jobConfigService.addBatchJob(batchJob);
         return new CommonResult(200, "ok");
     }
 }
