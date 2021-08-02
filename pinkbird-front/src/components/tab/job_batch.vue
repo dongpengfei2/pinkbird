@@ -74,6 +74,9 @@
         <el-form-item label="作业参数" prop="classArgs">
           <el-input v-model="addForm.classArgs"></el-input>
         </el-form-item>
+        <el-form-item label="并行度" prop="parallelism">
+          <el-input v-model="addForm.parallelism"></el-input>
+        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="addDialogVisible = false">取 消</el-button>
@@ -111,13 +114,23 @@
           jobName: '',
           pathJar: '',
           className: '',
-          classArgs: ''
+          classArgs: '',
+          parallelism: ''
         },
         // 添加表单验证规则对象
         addFormRules: {
           jobName: [
             { required: true, message: '请输入作业名称', trigger: 'blue' },
-            { min: 3, max: 10, message: '作业名称的长度在3～10个字符之间', trigger: 'blur' }
+            { min: 5, max: 30, message: '作业名称的长度在5～30个字符之间', trigger: 'blur' }
+          ],
+          pathJar: [
+            { required: true, message: '请输入jar路径', trigger: 'blue' }
+          ],
+          className: [
+            { required: true, message: '请输入主类名', trigger: 'blue' }
+          ],
+          classArgs: [
+            { required: true, message: '请输入作业参数', trigger: 'blue' }
           ]
         },
         // 控制修改用户对话框的显示与隐藏
